@@ -24,13 +24,18 @@ const pushIntoExcel = async (str) => {
   ]);
 };
 
+const getCoveragePercentage = (report) => {
+  // this fn fetches coverage percentage from dom report
+  const dom = parser.parseFromString(report);
+  const divArr = dom.getElementsByTagName("div");
+  return divArr[divArr.length - 1].innerHTML;
+};
+
 (async () => {
   try {
     core.notice("Calling our action --> spreadsheet");
     const report = core.getInput("report");
-    const dom = parser.parseFromString(report);
-    const divArr = dom.getElementsByTagName("div");
-    const lineCoverage = divArr[divArr.length - 1].innerHTML;
+    const lineCoverage = getCoveragePercentage(report);
     pushIntoExcel(lineCoverage);
   } catch (err) {
     core.setFailed(err.message);

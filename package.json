@@ -1,6 +1,6 @@
 {
   "name": "coverage-spreadsheet",
-  "version": "v.0.9",
+  "version": "v.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {

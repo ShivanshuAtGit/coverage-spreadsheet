@@ -6,7 +6,7 @@ inputs:
     description: 'coverage report'
     required: true
     default: ''
-  private_id:
+  private_key:
     description: 'private key from google service'
     required: true
     default: ''
