@@ -1,0 +1,6 @@
+name: 'Coverage Spreadsheet'
+description: 'Append the coverage into a spreadsheet'
+author: 'Shivanshu Srivastava'
+runs: 
+  using: node12
+  main: index.js
