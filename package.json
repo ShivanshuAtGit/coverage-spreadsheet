@@ -1,6 +1,6 @@
 {
   "name": "coverage-spreadsheet",
-  "version": "1.0.0",
+  "version": "v.0.3",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,17 +8,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SvavaCapital/coverage-spreadsheet.git"
+    "url": "git+https://github.com/shivanshuAtGit/coverage-spreadsheet.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SvavaCapital/coverage-spreadsheet/issues"
+    "url": "https://github.com/shivanshuAtGit/coverage-spreadsheet/issues"
   },
-  "homepage": "https://github.com/SvavaCapital/coverage-spreadsheet#readme",
+  "homepage": "https://github.com/shivanshuAtGit/coverage-spreadsheet#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
     "google-spreadsheet": "^3.3.0"
-  }
+  },
+  "devDependencies": {}
 }
