@@ -1,6 +1,11 @@
 name: 'Coverage Spreadsheet'
 description: 'Append the coverage into a spreadsheet'
 author: 'Shivanshu Srivastava'
+inputs:
+  report:  # id of input
+    description: 'coverage report'
+    required: true
+    default: ''
 runs: 
-  using: node12
+  using: node16
   main: index.js
