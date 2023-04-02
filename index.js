@@ -16,9 +16,7 @@ const pushIntoExcel = async (coverage) => {
   const sheet = doc.sheetsByIndex[0];
 
   await sheet.addRows([
-    github.context.ref,
-    ...Object.values(coverage),
-    new Date(),
+    [github.context.ref, ...Object.values(coverage), new Date()],
   ]);
 };
 
