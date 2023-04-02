@@ -6,7 +6,7 @@ const { GoogleSpreadsheet } = require("google-spreadsheet");
 const parser = new DomParser();
 const doc = new GoogleSpreadsheet(core.getInput("doc_id"));
 
-const pushIntoExcel = async (coverage) => {
+const pushIntoExcel = async (coverage = {}) => {
   await doc.useServiceAccountAuth({
     private_key: core.getInput("private_key"),
     client_email: core.getInput("client_email"),
@@ -16,7 +16,7 @@ const pushIntoExcel = async (coverage) => {
   const sheet = doc.sheetsByIndex[0];
 
   await sheet.addRows([
-    [github.context.ref, ...Object.values(coverage), new Date()],
+    [github.context.ref, ...Object.values(coverage), new Date()]
   ]);
 };
 
@@ -25,10 +25,10 @@ const getCoveragePercentage = (report) => {
   const dom = parser.parseFromString(report);
   const divArr = dom.getElementsByTagName("div");
   return {
-    statementCoverage: divArr[1],
-    branchCoverage: divArr[2],
-    functionCoverage: divArr[3],
-    lineCoverage: divArr[4],
+    statementCoverage: divArr[1] || "",
+    branchCoverage: divArr[2] || "",
+    functionCoverage: divArr[3] || "",
+    lineCoverage: divArr[4] || "",
   };
 };
 
