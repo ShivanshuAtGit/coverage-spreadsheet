@@ -2,23 +2,22 @@ const core = require("@actions/core");
 const github = require("@actions/github");
 const DomParser = require("dom-parser");
 const { GoogleSpreadsheet } = require("google-spreadsheet");
-const creds = require("./client_secret.json");
 
 const parser = new DomParser();
-const doc = new GoogleSpreadsheet(
-  "1nNIMn_0vXO4Vd8Zavft9I-3y9y5atfHS8KuTQNTec-8"
-);
+const doc = new GoogleSpreadsheet(core.getInput("doc_id"));
 
 const pushIntoExcel = async (str) => {
-  await doc.useServiceAccountAuth(creds);
+  await doc.useServiceAccountAuth({
+    private_key: core.getInput("private_key"),
+    client_email: core.getInput("client_email"),
+  }); // authenticating credential for gcloud service
 
   await doc.loadInfo(); // loads document properties and worksheets
   const sheet = doc.sheetsByIndex[0];
-  await sheet.setHeaderRow(["branch", "percentage", "date"]);
 
   await sheet.addRows([
     {
-      branch: "testing branch",
+      branch: github.context.ref,
       percentage: str,
       date: new Date(),
     },
@@ -30,8 +29,9 @@ const pushIntoExcel = async (str) => {
     core.notice("Calling our action --> spreadsheet");
     const report = core.getInput("report");
     const dom = parser.parseFromString(report);
-    pushIntoExcel(report);
-    console.log(dom);
+    const divArr = dom.getElementsByTagName("div");
+    const lineCoverage = divArr[divArr.length - 1].innerHTML;
+    pushIntoExcel(lineCoverage);
   } catch (err) {
     core.setFailed(err.message);
   }
