@@ -1,5 +1,5 @@
-const core = require("@action/core");
-const github = require("@action/github");
+const core = require("@actions/core");
+const github = require("@actions/github");
 
 (async () => {
   try {
